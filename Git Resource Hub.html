@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUCC Git & GitHub Reference Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        devDark: '#010409',
+                        devCard: '#0d1117',
+                        devBorder: '#30363d',
+                        devText: '#c9d1d9',
+                        devBlue: '#58a6ff',
+                        devGreen: '#238636',
+                        devRed: '#f85149',
+                        devOrange: '#d29922'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Modern Scrollbar Styling for WebKit Engines (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #010409; }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
+        
+        /* Firefox Scrollbar Styling */
+        * { scrollbar-width: thin; scrollbar-color: #30363d #010409; }
+    </style>
+</head>
+<body class="bg-devDark text-devText font-sans antialiased min-h-screen">
+
+    <nav class="border-b border-devBorder bg-devDark/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-devGreen text-white font-bold px-3 py-1 rounded-md text-xs tracking-wider uppercase">KUCC</span>
+                <span class="font-semibold text-lg tracking-tight text-white">Git & GitHub Core Library</span>
+            </div>
+            <div class="flex space-x-4 text-sm font-medium">
+                <a href="#lab-steps" class="text-slate-400 hover:text-white transition">Live Lab</a>
+                <a href="#command-library" class="text-slate-400 hover:text-white transition">Command Library</a>
+                <a href="#sandbox" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg transition">Sandbox Directory</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 border-b border-devBorder">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-none mb-4">
+                The Ultimate Git Resource Hub
+            </h1>
+            <p class="text-lg text-slate-400 leading-relaxed">
+                Welcome, First Years! Use this page during today's KUCC hands-on workshop to complete your live assignment. Bookmark it to use as a reliable reference library for your upcoming semester projects.
+            </p>
+        </div>
+    </header>
+
+    <main id="lab-steps" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-8">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code text-devBlue"></i> Today's Workshop Mission
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-devCard border border-devBorder p-5 rounded-xl space-y-2 hover:border-devBlue/30 transition">
+                    <div class="text-devBlue font-bold text-sm tracking-wide uppercase">Step 1: Fork & Star</div>
+                    <p class="text-sm text-slate-400">Click the <strong>Star</strong> button on our repository to support KUCC, then click <strong>Fork</strong> to generate a separate copy of this project directly on your GitHub profile.</p>
+                </div>
+
+                <div class="bg-devCard border border-devBorder p-5 rounded-xl space-y-2 hover:border-devBlue/30 transition">
+                    <div class="text-devBlue font-bold text-sm tracking-wide uppercase">Step 2: Local Clone</div>
+                    <p class="text-sm text-slate-400">Open your terminal and clone down your unique forked copy to your local machine using the command below:</p>
+                    <code class="block bg-black text-emerald-400 text-xs p-2 rounded border border-slate-800 select-all">git clone https://github.com/YOUR-USERNAME/repo-name.git</code>
+                </div>
+
+                <div class="bg-devCard border border-devBorder p-5 rounded-xl space-y-2 hover:border-devBlue/30 transition">
+                    <div class="text-devBlue font-bold text-sm tracking-wide uppercase">Step 3: Modify Code</div>
+                    <p class="text-sm text-slate-400">Open the folder in VS Code (`code .`). Locate the <code>&lt;!-- CONTRIBUTORS START --&gt;</code> tag and append your structured profile badge block right into the list.</p>
+                </div>
+
+                <div class="bg-devCard border border-devBorder p-5 rounded-xl space-y-2 hover:border-devBlue/30 transition">
+                    <div class="text-devBlue font-bold text-sm tracking-wide uppercase">Step 4: Commit & PR</div>
+                    <p class="text-sm text-slate-400">Stage your changes, commit them locally, and push them back out up to your remote profile. Finally, initiate a live <strong>Pull Request</strong> back to us!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="sandbox" class="lg:col-span-1 space-y-4">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-users text-devGreen"></i> Registry Sandbox
+            </h2>
+            <p class="text-xs text-slate-400 leading-normal">
+                This sandbox lists approved Pull Requests. Insert your profile badge below the example.
+            </p>
+
+            <div class="bg-devCard border border-devBorder rounded-xl p-4 space-y-3 max-h-[420px] min-h-[300px] overflow-y-scroll pr-2">
+                <div class="bg-slate-900/60 border border-devBorder p-3 rounded-lg flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <h4 class="font-medium text-white text-sm">Mimansh Pokhrel Neupane</h4>
+                        <span class="text-xs text-slate-500 font-mono">Roll: 04 (CS-2nd Yr)</span>
+                    </div>
+                    <span class="text-xs bg-devGreen/10 text-devGreen border border-devGreen/20 px-2 py-0.5 rounded font-medium">KUCC Exec</span>
+                </div>
+
+                <div class="bg-slate-900/60 border border-devBorder p-3 rounded-lg flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <h4 class="font-medium text-white text-sm">[Your Name Here]</h4>
+                        <span class="text-xs text-slate-500 font-mono">Roll: [Your Roll] (CS-1st Yr)</span>
+                    </div>
+                    <span class="text-xs bg-devBlue/10 text-devBlue border border-devBlue/20 px-2 py-0.5 rounded font-medium">Contributor</span>
+                </div>
+
+                </div>
+        </div>
+    </main>
+
+    <section id="command-library" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-devBorder space-y-8">
+        <div>
+            <h2 class="text-3xl font-extrabold text-white tracking-tight">
+                <i class="fa-solid fa-book-bookmark text-devOrange mr-2"></i> Real-World Git Command Library
+            </h2>
+            <p class="text-slate-400 mt-2 text-sm">Categorized reference manual for everyday local and cloud development workflows.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="bg-devCard border border-devBorder rounded-xl p-6 space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2 text-white font-bold">
+                        <i class="fa-solid fa-sliders text-devBlue"></i>
+                        <span>1. Configuration & Setup</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Run these commands when configuring a brand-new computer environment or starting a new repository assignment from scratch.</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div>
+                            <code class="bg-black text-devBlue text-xs p-1.5 rounded block select-all">git config --global user.name "YourName"</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Identifies your code authorship globally.</span>
+                        </div>
+                        <div>
+                            <code class="bg-black text-devBlue text-xs p-1.5 rounded block select-all">git init</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Turns the current local directory into an active Git repo.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-devCard border border-devBorder rounded-xl p-6 space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2 text-white font-bold">
+                        <i class="fa-solid fa-rotate text-devGreen"></i>
+                        <span>2. The Daily Code Pipeline</span>
+                    </div>
+                    <p class="text-xs text-slate-400">The basic loop you run through multiple times a day while building features or fixing system bugs.</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div>
+                            <code class="bg-black text-devGreen text-xs p-1.5 rounded block select-all">git add .</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Stages *all* modified and new files for the upcoming commit.</span>
+                        </div>
+                        <div>
+                            <code class="bg-black text-devGreen text-xs p-1.5 rounded block select-all">git commit -m "feat: core tracking"</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Takes an encrypted historical snapshot of staged changes.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-devCard border border-devBorder rounded-xl p-6 space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2 text-white font-bold">
+                        <i class="fa-solid fa-code-branch text-purple-400"></i>
+                        <span>3. Branch Management</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Essential for production environments where you must safely isolate experimental work away from your core codebase lines.</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div>
+                            <code class="bg-black text-purple-400 text-xs p-1.5 rounded block select-all">git checkout -b feature/login</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Creates a new feature branch and switches directly into it.</span>
+                        </div>
+                        <div>
+                            <code class="bg-black text-purple-400 text-xs p-1.5 rounded block select-all">git branch -a</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Lists all tracking branches across both local and remote streams.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-devCard border border-devBorder rounded-xl p-6 space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2 text-white font-bold">
+                        <i class="fa-solid fa-box-archive text-devOrange"></i>
+                        <span>4. The Git Stash (Save State)</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Invaluable when you need to switch tasks immediately but aren't ready to commit half-written, broken code.</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div>
+                            <code class="bg-black text-devOrange text-xs p-1.5 rounded block select-all">git stash</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Shelves your uncommitted files into a temporary storage drawer.</span>
+                        </div>
+                        <div>
+                            <code class="bg-black text-devOrange text-xs p-1.5 rounded block select-all">git stash pop</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Restores the most recently stashed changes back into your workspace.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-devCard border border-devBorder rounded-xl p-6 space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2 text-white font-bold">
+                        <i class="fa-solid fa-eye text-teal-400"></i>
+                        <span>5. Inspecting Project History</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Commands to track down bugs, review past log entries, or figure out exactly who altered a line of logic.</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div>
+                            <code class="bg-black text-teal-400 text-xs p-1.5 rounded block select-all">git log --oneline --graph --all</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Displays a beautiful, scannable ASCII tree layout of all history.</span>
+                        </div>
+                        <div>
+                            <code class="bg-black text-teal-400 text-xs p-1.5 rounded block select-all">git blame file.js</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Shows authors and commit stamps for every single line inside a file.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-devCard border border-devBorder rounded-xl p-6 space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2 text-white font-bold">
+                        <i class="fa-solid fa-triangle-exclamation text-devRed"></i>
+                        <span>6. The Panic Buttons (Undo)</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Mistakes happen. These commands allow you to safely rewrite or overwrite broken states to return to safe baselines.</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div>
+                            <code class="bg-black text-devRed text-xs p-1.5 rounded block select-all">git checkout -- filename.html</code>
+                            <span class="text-[11px] text-slate-500 block mt-1">Discards local uncommitted updates to match the last commit.</span>
+                        </div>
+                        <div>
+                            <code class="bg-black text-devRed text-xs p-1.5 rounded block select-all">git reset --hard HEAD~1</code>
+                            <span class="text-[11px] text-slate-500 block mt-1"> Nukes the absolute latest commit completely out of existence. Use with extreme caution!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-devBorder text-center text-xs text-slate-500 space-y-2">
+        <p>Kathmandu University Computer Club (KUCC) — Department of Computer Science and Engineering.</p>
+        <p class="font-mono text-[11px]">$ git log -1 --format="%h - %an, %ar : %s"</p>
+    </footer>
+
+</body>
+</html>
