@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Masterclass - Unified</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
+        
+        html {
+            font-size: clamp(16px, 1.4vw, 26px);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            background-color: #0f172a; 
+            color: #f8fafc; 
+        }
+        
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            box-sizing: border-box;
+            transform: scale(0.95);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        /* Abstract Tech Background for Slide 1 */
+        .bg-neural-network {
+            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20251117/pngtree-abstract-network-of-glowing-neural-pathways-against-a-dark-blue-background-image_20333105.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        #progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+
+        #slide-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            font-family: 'Fira Code', monospace;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        .slide-content {
+            width: 100%;
+            max-width: 95vw;
+        }
+
+        .slide-header {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: left;
+            width: 100%;
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #38bdf8;
+            font-size: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid #334155;
+            text-align: left;
+        }
+        th {
+            background-color: #1e293b;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Welcome & Overview -->
+    <div class="slide active bg-neural-network" id="slide-1">
+        <div class="text-center z-10 glass-panel p-16 rounded-3xl shadow-2xl max-w-4xl border-t border-blue-500/30">
+            <div class="flex justify-center mb-6">
+                <i class="fa-brands fa-git-alt text-7xl text-orange-500 mr-4"></i>
+                <i class="fa-brands fa-github text-7xl text-white"></i>
+            </div>
+            <h1 class="text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
+                Intro to Git and GitHub
+            </h1>
+            <h2 class="text-2xl font-light text-slate-300 mb-8 tracking-wide uppercase">
+                Kathmandu University Computer Club (KUCC)
+            </h2>
+            <div class="h-px w-full bg-slate-700 mb-8"></div>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                Focus: Empowering Students with Version Control & Modern Git Workflows
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="slide" id="slide-2">
+        <div class="slide-content">
+            <h2 class="slide-header">Table of Contents</h2>
+            <div class="grid grid-cols-2 gap-x-12 gap-y-6 text-xl text-slate-300 mt-8">
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">1.</span> Version Control Concepts</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">6.</span> Conventional Commits</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">2.</span> What is Git & Its Evolution</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">7.</span> Branching Strategy</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">3.</span> Git vs GitHub & Ecosystem</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">8.</span> Merge Conflicts</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">4.</span> Repository Architecture</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">9.</span> Collaborative Workflow</div>
+                <div class="flex items-center p-3 bg-slate-800 rounded-lg border border-slate-600"><span class="text-blue-400 font-bold mr-4">5.</span> Essential Commands & Flow</div>
+                <div class="flex items-center"><span class="text-blue-500 font-bold mr-4">10.</span> Hands-On Challenge</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Version Control Concepts -->
+    <div class="slide" id="slide-3">
+        <div class="slide-content">
+            <h2 class="slide-header">What is Version Control?</h2>
+            <p class="text-xl mb-12 text-slate-300">Think of Version Control as a time machine for your project files.</p>
+            
+            <div class="grid grid-cols-3 gap-8">
+                <div class="bg-slate-800 p-8 rounded-xl border-t-4 border-purple-500 shadow-lg">
+                    <div class="text-purple-400 mb-4"><i class="fa-solid fa-gamepad text-4xl"></i></div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Video Game Saves</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Like saving your game before a difficult boss fight. If you lose, you do not start from the beginning: you reload from your last save point.</p>
+                </div>
+
+                <div class="bg-slate-800 p-8 rounded-xl border-t-4 border-blue-500 shadow-lg">
+                    <div class="text-blue-400 mb-4"><i class="fa-solid fa-file-lines text-4xl"></i></div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Google Docs History</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Tracks every edit you make, allowing you to seamlessly restore previous versions of a document if a paragraph is accidentally deleted.</p>
+                </div>
+
+                <div class="bg-slate-800 p-8 rounded-xl border-t-4 border-green-500 shadow-lg">
+                    <div class="text-green-400 mb-4"><i class="fa-solid fa-rotate-left text-4xl"></i></div>
+                    <h3 class="text-xl font-bold mb-4 text-white">The Undo Button</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">It is the ultimate Undo for an entire project structure, tracking not just one file, but thousands of files simultaneously and safely.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: What is Git? -->
+    <div class="slide" id="slide-4">
+        <div class="slide-content">
+            <h2 class="slide-header">What is Git?</h2>
+            
+            <div class="grid grid-cols-5 gap-12 items-center">
+                <div class="col-span-2">
+                    <img src="https://i.redd.it/4kyy0k93da741.jpg" alt="Linus Torvalds" class="rounded-xl shadow-2xl border-4 border-slate-700 w-full object-cover">
+                    <p class="text-center text-xs text-slate-500 mt-2">Created in 2005 by Linus Torvalds</p>
+                </div>
+                
+                <div class="col-span-3">
+                    <p class="text-xl mb-8 text-slate-300">Git tracks changes in your code over time, allowing you to "save" stable versions of your work and travel back if something breaks.</p>
+                    
+                    <h3 class="text-2xl font-bold mb-6 text-white border-b border-slate-700 pb-2">Core Pillars of Git:</h3>
+                    <ul class="space-y-6">
+                        <li class="flex">
+                            <i class="fa-solid fa-clock-rotate-left text-blue-400 text-xl mt-1 mr-4 w-6"></i>
+                            <div>
+                                <strong class="text-white block mb-1">History tracking:</strong>
+                                <span class="text-slate-400 text-sm">Maintain complete historical records of every file modification.</span>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fa-solid fa-users text-green-400 text-xl mt-1 mr-4 w-6"></i>
+                            <div>
+                                <strong class="text-white block mb-1">Collaboration support:</strong>
+                                <span class="text-slate-400 text-sm">Allows multiple individuals to seamlessly work together on the same project without overwriting each other's contributions.</span>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fa-solid fa-shield-halved text-purple-400 text-xl mt-1 mr-4 w-6"></i>
+                            <div>
+                                <strong class="text-white block mb-1">Data integrity:</strong>
+                                <span class="text-slate-400 text-sm">Cryptographically protects your architecture history against corruption.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Evolution of Git -->
+    <div class="slide" id="slide-5">
+        <div class="slide-content">
+            <h2 class="slide-header">The Evolution of Git</h2>
+            <p class="text-xl mb-16 text-slate-300">The journey of how Git became the global industry baseline.</p>
+            
+            <div class="relative w-full mt-12">
+                <!-- Connecting Line -->
+                <div class="absolute top-6 left-10 right-10 h-1 bg-slate-700 z-0"></div>
+                
+                <div class="grid grid-cols-5 gap-6 relative z-10">
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-4 border-blue-500 flex items-center justify-center mb-6 shadow-lg"></div>
+                        <h3 class="font-bold text-blue-400 text-lg mb-3">2002</h3>
+                        <p class="text-sm text-center text-slate-400">The Linux kernel project relies on BitKeeper, a proprietary version control tool.</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center pt-16 relative">
+                        <div class="absolute top-0 w-12 h-12 rounded-full bg-slate-800 border-4 border-cyan-400 flex items-center justify-center mb-6 shadow-lg"></div>
+                        <h3 class="font-bold text-cyan-400 text-lg mb-3">Apr 2005</h3>
+                        <p class="text-sm text-center text-slate-400">The BitKeeper license is revoked; Linus Torvalds starts building Git.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-4 border-green-400 flex items-center justify-center mb-6 shadow-lg"></div>
+                        <h3 class="font-bold text-green-400 text-lg mb-3">Jun 2005</h3>
+                        <p class="text-sm text-center text-slate-400">Git is stable enough to manage official Linux Kernel releases.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center pt-16 relative">
+                        <div class="absolute top-0 w-12 h-12 rounded-full bg-slate-800 border-4 border-yellow-400 flex items-center justify-center mb-6 shadow-lg"></div>
+                        <h3 class="font-bold text-yellow-400 text-lg mb-3">Dec 2005</h3>
+                        <p class="text-sm text-center text-slate-400">Git 1.0 is officially released to the public.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-blue-600 border-4 border-white flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(59,130,246,0.8)]"></div>
+                        <h3 class="font-bold text-white text-lg mb-3">Today</h3>
+                        <p class="text-sm text-center text-slate-300">The global standard for software engineering across the tech industry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Git vs GitHub -->
+    <div class="slide" id="slide-6">
+        <div class="slide-content">
+            <h2 class="slide-header">Git vs. GitHub</h2>
+            <p class="text-lg mb-8 text-slate-300">Understanding the difference between the engine and the ecosystem:</p>
+            
+            <div class="bg-slate-800 rounded-xl overflow-hidden mb-8 shadow-xl border border-slate-700">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Feature</th>
+                            <th class="w-3/8 text-orange-400"><i class="fa-brands fa-git-alt mr-2"></i> Git (The Tool)</th>
+                            <th class="w-3/8 text-white"><i class="fa-brands fa-github mr-2"></i> GitHub (The Service)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 text-sm">
+                        <tr>
+                            <td class="font-bold text-white">Definition</td>
+                            <td>Software locally installed on your PC.</td>
+                            <td>A cloud-based platform for repository hosting.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-white bg-slate-800/50">Main Job</td>
+                            <td class="bg-slate-800/50">Tracks changes in local files and codebases.</td>
+                            <td class="bg-slate-800/50">Stores, hosts, and shares code online.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-white">UI</td>
+                            <td>Command Line Interface (CLI) driven.</td>
+                            <td>Web-based Graphical User Interface (GUI).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-white bg-slate-800/50">Network</td>
+                            <td class="bg-slate-800/50">Works completely offline.</td>
+                            <td class="bg-slate-800/50">Requires internet connectivity.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-blue-900/30 p-6 rounded-xl border border-blue-500/50 flex items-center">
+                <i class="fa-solid fa-lightbulb text-3xl text-yellow-400 mr-6"></i>
+                <p class="text-lg text-blue-100"><strong>Metaphor:</strong> Think of <strong>Git</strong> as the engine of a car and <strong>GitHub</strong> as the chassis and dashboard.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: The Git Ecosystem -->
+    <div class="slide" id="slide-7">
+        <div class="slide-content">
+            <h2 class="slide-header">The Git Ecosystem</h2>
+            <p class="text-xl mb-12 text-slate-300">While GitHub is the clear industry leader, alternative ecosystems leverage the core power of Git:</p>
+            
+            <div class="grid grid-cols-3 gap-8">
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg flex flex-col items-center text-center">
+                    <i class="fa-brands fa-github text-6xl text-white mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-white">GitHub</h3>
+                    <p class="text-sm text-slate-400">The global hub for open-source development, social coding, actions, and massive community ecosystems. Founded in 2008 and acquired by Microsoft in 2018 for $7.5 Billion.</p>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg flex flex-col items-center text-center">
+                    <i class="fa-brands fa-gitlab text-6xl text-orange-500 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-white">GitLab</h3>
+                    <p class="text-sm text-slate-400">A complete DevOps platform highly favored for enterprise self-hosting environments and robust built-in CI/CD deployment pipelines.</p>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg flex flex-col items-center text-center">
+                    <i class="fa-brands fa-bitbucket text-6xl text-blue-500 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Bitbucket</h3>
+                    <p class="text-sm text-slate-400">Atlassian's repository platform offering native integration with Jira and Trello, popular in corporate business environments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Repository Architecture -->
+    <div class="slide" id="slide-8">
+        <div class="slide-content">
+            <h2 class="slide-header">The Repository Architecture</h2>
+            <p class="text-lg mb-8 text-slate-300">A Repository (Repo) functions like a smart project folder, keeping track of every single file along with its complete, unalterable revision history.</p>
+            
+            <div class="grid grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-laptop-code text-3xl text-blue-400 mr-4 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Local Repo</h3>
+                            <p class="text-slate-400 text-sm">Stored securely directly on your individual PC.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-cloud text-3xl text-green-400 mr-4 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Remote Repo</h3>
+                            <p class="text-slate-400 text-sm">Hosted in the cloud via service environments like GitHub.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-600 mt-8">
+                        <h4 class="font-bold text-white mb-4 border-b border-slate-700 pb-2">Why Your GitHub Profile Matters:</h4>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> Provides visibility into project collaboration history.</li>
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> Acts as a reliable recovery point so you never lose code again.</li>
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> Serves as your modern, living developer resume as a student.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <img src="https://i.sstatic.net/y5O09.png" alt="Git Data Transport Commands" class="rounded-xl shadow-2xl bg-white p-2 w-full">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Essential Commands -->
+    <div class="slide" id="slide-9">
+        <div class="slide-content">
+            <h2 class="slide-header">Essential Git Commands</h2>
+            <p class="text-lg mb-8 text-slate-300">The foundational command-line interface tools you need to manage local code histories:</p>
+            
+            <div class="bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-slate-700">
+                <div class="bg-slate-800 p-3 flex gap-2 border-b border-slate-700">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/3 text-blue-400 code-font text-lg">Command</th>
+                            <th class="text-white text-lg">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300">
+                        <tr>
+                            <td class="code-font font-bold text-green-400">git init</td>
+                            <td>Initializes a brand-new, empty local Git repository inside a folder.</td>
+                        </tr>
+                        <tr class="bg-slate-800/30">
+                            <td class="code-font font-bold text-green-400">git add &lt;file&gt;</td>
+                            <td>Stages specific local changes, prepping them to be saved in the next commit.</td>
+                        </tr>
+                        <tr>
+                            <td class="code-font font-bold text-green-400">git commit -m "msg"</td>
+                            <td>Permanently snapshots your staged modifications directly into local history.</td>
+                        </tr>
+                        <tr class="bg-slate-800/30">
+                            <td class="code-font font-bold text-green-400">git push</td>
+                            <td>Uploads all your newly recorded local commits up to a remote cloud repo.</td>
+                        </tr>
+                        <tr>
+                            <td class="code-font font-bold text-green-400">git pull</td>
+                            <td>Fetches and downloads all incoming modifications from the remote server to your PC.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Git Stage-to-Push Flow -->
+    <div class="slide" id="slide-10">
+        <div class="slide-content">
+            <h2 class="slide-header">The Standard Git Stage-to-Push Flow</h2>
+            <p class="text-lg mb-12 text-slate-300 text-center">The cyclical path code takes from your initial local keystroke up to a live server deployment:</p>
+
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-4 w-full">
+                <!-- Working Directory -->
+                <div class="bg-orange-600/20 border-2 border-orange-500 rounded-xl p-6 text-center flex-1 shadow-lg flex flex-col justify-center">
+                    <i class="fa-solid fa-folder-open text-4xl text-orange-400 mb-4"></i>
+                    <h3 class="font-bold text-white text-lg mb-2">Working Directory</h3>
+                    <p class="text-xs text-slate-300">Where you actively write and edit files on your computer.</p>
+                </div>
+
+                <div class="flow-arrow flex-col flex justify-center items-center flex-shrink-0">
+                    <span class="code-font text-sm mb-1 text-slate-400">git add</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <!-- Staging Area -->
+                <div class="bg-yellow-600/20 border-2 border-yellow-500 rounded-xl p-6 text-center flex-1 shadow-lg flex flex-col justify-center">
+                    <i class="fa-solid fa-box-archive text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="font-bold text-white text-lg mb-2">Staging Area</h3>
+                    <p class="text-xs text-slate-300">The preparation zone where you bundle specific files.</p>
+                </div>
+
+                <div class="flow-arrow flex-col flex justify-center items-center flex-shrink-0">
+                    <span class="code-font text-sm mb-1 text-slate-400">git commit</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <!-- Local Repo -->
+                <div class="bg-teal-600/20 border-2 border-teal-500 rounded-xl p-6 text-center flex-1 shadow-lg flex flex-col justify-center">
+                    <i class="fa-solid fa-database text-4xl text-teal-400 mb-4"></i>
+                    <h3 class="font-bold text-white text-lg mb-2">Local Repository</h3>
+                    <p class="text-xs text-slate-300">The on-device database storing permanent snapshots.</p>
+                </div>
+
+                <div class="flow-arrow flex-col flex justify-center items-center flex-shrink-0">
+                    <span class="code-font text-sm mb-1 text-slate-400">git push</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <!-- Remote Repo -->
+                <div class="bg-blue-600/20 border-2 border-blue-500 rounded-xl p-6 text-center flex-1 shadow-lg flex flex-col justify-center">
+                    <i class="fa-solid fa-cloud text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="font-bold text-white text-lg mb-2">Remote Repository</h3>
+                    <p class="text-xs text-slate-300">The shared cloud environment updated via push.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Conventional Commits -->
+    <div class="slide" id="slide-11">
+        <div class="slide-content">
+            <h2 class="slide-header">Conventional Commits</h2>
+            <p class="text-lg mb-8 text-slate-300">When writing commit messages, developers use structured layouts to maintain a clean history. A standardized commit message contains a mandatory header describing the exact nature of the modification.</p>
+
+            <h3 class="text-2xl font-bold mb-6 text-white border-b border-slate-700 pb-2">The Header (Mandatory)</h3>
+            <p class="mb-6 text-slate-400">Type: Dictates the intent of the change.</p>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-lg flex items-center shadow-md">
+                    <span class="px-3 py-1 bg-blue-600 text-white rounded font-bold code-font text-sm mr-4 w-28 text-center tracking-wide">feat:</span>
+                    <span class="text-sm text-slate-300">A new feature for the end-user.</span>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-lg flex items-center shadow-md">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded font-bold code-font text-sm mr-4 w-28 text-center tracking-wide">docs:</span>
+                    <span class="text-sm text-slate-300">Documentation updates only.</span>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-lg flex items-center shadow-md">
+                    <span class="px-3 py-1 bg-red-600 text-white rounded font-bold code-font text-sm mr-4 w-28 text-center tracking-wide">fix:</span>
+                    <span class="text-sm text-slate-300">A bug fix.</span>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-lg flex items-center shadow-md">
+                    <span class="px-3 py-1 bg-purple-600 text-white rounded font-bold code-font text-sm mr-4 w-28 text-center tracking-wide">style:</span>
+                    <span class="text-sm text-slate-300">Code formatting (spaces, semicolons) without logic changes.</span>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-lg flex items-center shadow-md">
+                    <span class="px-3 py-1 bg-yellow-600 text-white rounded font-bold code-font text-sm mr-4 w-28 text-center tracking-wide">refactor:</span>
+                    <span class="text-sm text-slate-300">Rewriting code without changing behavior or fixing bugs.</span>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-lg flex items-center shadow-md">
+                    <span class="px-3 py-1 bg-pink-600 text-white rounded font-bold code-font text-sm mr-4 w-28 text-center tracking-wide">perf:</span>
+                    <span class="text-sm text-slate-300">Performance optimizations.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Branching Strategy -->
+    <div class="slide" id="slide-12">
+        <div class="slide-content">
+            <h2 class="slide-header">Standard Development Branch Strategy</h2>
+            <p class="text-lg mb-8 text-slate-300">In team environments, engineers utilize branching strategies to build separate lines of development without destabilizing production code:</p>
+            
+            <div class="grid grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-cyan-400 shadow-md">
+                        <h4 class="font-bold text-white mb-1">Prod Branch</h4>
+                        <p class="text-sm text-slate-400">The live application environment. Contains highly curated, stable code.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-red-400 shadow-md">
+                        <h4 class="font-bold text-white mb-1">UAT/Staging Branch</h4>
+                        <p class="text-sm text-slate-400">User Acceptance Testing. Where final pre-live operational checks are performed.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-purple-400 shadow-md">
+                        <h4 class="font-bold text-white mb-1">Dev Branch</h4>
+                        <p class="text-sm text-slate-400">The main integration destination where new engineering modules converge.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-orange-400 shadow-md relative">
+                        <h4 class="font-bold text-white mb-1">Feature Branch</h4>
+                        <p class="text-sm text-slate-400">Isolated branches where individual developers work.</p>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded">Always branch off dev!</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <img src="https://miro.medium.com/1*diRLm1S5hkVoh5qeArND0Q.png" alt="Git Flow Diagram" class="rounded-xl shadow-2xl w-full bg-white p-2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Merging Strategies -->
+    <div class="slide" id="slide-13">
+        <div class="slide-content">
+            <h2 class="slide-header">Merging Strategies</h2>
+            <p class="text-xl mb-12 text-slate-300 text-center">Once a feature is finished, it must be integrated into the main pipeline using one of three options:</p>
+            
+            <div class="grid grid-cols-3 gap-8">
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 shadow-lg text-center">
+                    <i class="fa-solid fa-code-merge text-5xl text-blue-400 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4 text-white">Standard Merge</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Combines independent history paths together by creating a dedicated "Merge Commit". Safe, non-destructive, and retains the exact timeline context.</p>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 shadow-lg text-center">
+                    <i class="fa-solid fa-arrow-trend-up text-5xl text-purple-400 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4 text-white">Rebase</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Re-writes history by moving your feature commits sequentially to the absolute tip of the target base branch. Results in a clean, linear project history.</p>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 shadow-lg text-center">
+                    <i class="fa-solid fa-compress text-5xl text-orange-400 mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4 text-white">Squash Merge</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Condenses an entire long sequence of incremental feature branch commits down into one clean commit before applying it to the main branch.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Merge Conflicts -->
+    <div class="slide" id="slide-14">
+        <div class="slide-content">
+            <h2 class="slide-header">Understanding Merge Conflicts</h2>
+            
+            <div class="grid grid-cols-5 gap-12 items-center">
+                <div class="col-span-2">
+                    <p class="text-lg text-slate-300 mb-6">A merge conflict occurs when Git cannot automatically resolve file changes because two separate branches edited the exact same line of code. This is commonly referred to as the <strong class="text-red-400">"Clash of Code"</strong>.</p>
+                    
+                    <h3 class="text-xl font-bold text-white mb-4">Conflict Marker Breakdown:</h3>
+                    <p class="text-sm text-slate-400 mb-6">When a conflict happens, Git explicitly isolates the problematic area directly inside your source file using structural markers:</p>
+                    
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 code-font text-sm leading-relaxed">
+                        <span class="text-blue-400">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (Current Change)</span><br>
+                        <span class="text-green-400 ml-4">console.log("My Local Work");</span><br>
+                        <span class="text-slate-500">=======</span><br>
+                        <span class="text-purple-400 ml-4">console.log("Incoming Remote");</span><br>
+                        <span class="text-blue-400">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/login (Incoming)</span>
+                    </div>
+                </div>
+                
+                <div class="col-span-3">
+                    <img src="https://code.visualstudio.com/assets/docs/sourcecontrol/overview/merge-conflict.png" alt="VS Code Merge Conflict" class="rounded-xl shadow-2xl border border-slate-700 w-full">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15: Resolving Merge Conflicts -->
+    <div class="slide" id="slide-15">
+        <div class="slide-content">
+            <h2 class="slide-header">Resolving Merge Conflicts</h2>
+            <p class="text-xl mb-12 text-slate-300 text-center">To clear a conflict, you must choose which logic to prioritize:</p>
+            
+            <div class="grid grid-cols-3 gap-8 mb-12">
+                <div class="bg-slate-800 p-8 rounded-xl border-t-4 border-blue-500 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-blue-400">Accept Current</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Discards incoming modifications, keeping your local version of the code.</p>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-xl border-t-4 border-green-500 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-green-400">Accept Incoming</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Discards your local version, applying the code changes sent by your teammates.</p>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-xl border-t-4 border-purple-500 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-purple-400">Accept Both</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Combines both distinct blocks of code when both execution paths are necessary.</p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-900/30 border border-yellow-600/50 p-6 rounded-xl text-center">
+                <i class="fa-solid fa-triangle-exclamation text-yellow-500 text-2xl mb-2"></i>
+                <h4 class="font-bold text-yellow-400 mb-1">Rule of Thumb</h4>
+                <p class="text-yellow-100/80 text-sm">If you are actively on a <code class="bg-black/30 px-1 rounded">feature</code> branch and execute a merge command with <code class="bg-black/30 px-1 rounded">main</code>, the code inside <code class="bg-black/30 px-1 rounded">main</code> is treated as the <strong>Incoming change</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 16: Collaborative Workflow -->
+    <div class="slide" id="slide-16">
+        <div class="slide-content">
+            <h2 class="slide-header">The Global Collaborative Workflow</h2>
+            <p class="text-lg mb-16 text-center text-slate-300">The step-by-step loop for professional, open-source team contributions:</p>
+
+            <div class="flex flex-nowrap justify-center items-stretch gap-2 lg:gap-4 w-full">
+                <!-- 1 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 flex-1 shadow-lg flex flex-col justify-start">
+                    <h3 class="text-cyan-400 font-bold text-lg mb-4 text-center">1. Branch</h3>
+                    <p class="text-sm text-slate-300 text-center leading-relaxed">Generate a unique branch named <code class="bg-slate-900 text-cyan-300 px-1 rounded">feat/ui</code> based off the latest dev update.</p>
+                </div>
+
+                <div class="flow-arrow flex-shrink-0 flex items-center justify-center"><i class="fa-solid fa-chevron-right text-green-400"></i></div>
+
+                <!-- 2 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 flex-1 shadow-lg flex flex-col justify-start">
+                    <h3 class="text-cyan-400 font-bold text-lg mb-4 text-center">2. Commit</h3>
+                    <p class="text-sm text-slate-300 text-center leading-relaxed">Build out your code solution and save your milestones locally.</p>
+                </div>
+
+                <div class="flow-arrow flex-shrink-0 flex items-center justify-center"><i class="fa-solid fa-chevron-right text-green-400"></i></div>
+
+                <!-- 3 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 flex-1 shadow-lg flex flex-col justify-start">
+                    <h3 class="text-cyan-400 font-bold text-lg mb-4 text-center">3. PR</h3>
+                    <p class="text-sm text-slate-300 text-center leading-relaxed">Propose changes by launching a Pull Request tracking into dev.</p>
+                </div>
+
+                <div class="flow-arrow flex-shrink-0 flex items-center justify-center"><i class="fa-solid fa-chevron-right text-green-400"></i></div>
+
+                <!-- 4 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 flex-1 shadow-lg flex flex-col justify-start">
+                    <h3 class="text-cyan-400 font-bold text-lg mb-4 text-center">4. Resolve</h3>
+                    <p class="text-sm text-slate-300 text-center leading-relaxed">Fix conflict warnings and iterate based on team code reviews.</p>
+                </div>
+
+                <div class="flow-arrow flex-shrink-0 flex items-center justify-center"><i class="fa-solid fa-chevron-right text-green-400"></i></div>
+
+                <!-- 5 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 flex-1 shadow-lg flex flex-col justify-start">
+                    <h3 class="text-cyan-400 font-bold text-lg mb-4 text-center">5. Merge</h3>
+                    <p class="text-sm text-slate-300 text-center leading-relaxed">Approved feature code is merged directly into the live ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 17: Hands-On Challenge -->
+    <div class="slide" id="slide-17">
+        <div class="slide-content">
+            <h2 class="slide-header">Hands-On Challenge Session</h2>
+            <p class="text-xl mb-12 text-slate-300 text-center">Put theory into practice by contributing to the official KUCC directory:</p>
+
+            <div class="grid grid-cols-5 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-slate-800 border-t-4 border-blue-500 rounded-xl p-6 text-center shadow-lg relative">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-lg border-4 border-slate-900">1</div>
+                    <h4 class="font-bold text-white mt-4 mb-3 text-lg">Discover & Star</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Open the official workshop repo via <code class="text-blue-300">kuosc-git-workshop.netlify.app</code><br><br>Tap the Star button to support the community.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-slate-800 border-t-4 border-blue-500 rounded-xl p-6 text-center shadow-lg relative">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-lg border-4 border-slate-900">2</div>
+                    <h4 class="font-bold text-white mt-4 mb-3 text-lg">Fork</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Select the Fork utility button to clone your own editable copy directly into your personal account profile.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-800 border-t-4 border-blue-500 rounded-xl p-6 text-center shadow-lg relative">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-lg border-4 border-slate-900">3</div>
+                    <h4 class="font-bold text-white mt-4 mb-3 text-lg">Edit</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Open the project, locate the <code class="text-blue-300">contributors.html</code> file, and append your name to the file list.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-800 border-t-4 border-blue-500 rounded-xl p-6 text-center shadow-lg relative">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-lg border-4 border-slate-900">4</div>
+                    <h4 class="font-bold text-white mt-4 mb-3 text-lg">Push</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Commit your configuration change and push it directly up to your remote fork repository.</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-slate-800 border-t-4 border-blue-500 rounded-xl p-6 text-center shadow-lg relative">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-lg border-4 border-slate-900">5</div>
+                    <h4 class="font-bold text-white mt-4 mb-3 text-lg">PR</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Issue a Pull Request back to the core repository to finalize your contribution!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 18: Q&A -->
+    <div class="slide" id="slide-18">
+        <div class="slide-content text-center">
+            <h2 class="text-6xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Q&A Session</h2>
+            <p class="text-2xl text-slate-300 mb-16">Thank you for participating in the KUCC Masterclass!</p>
+            
+            <div class="inline-block bg-slate-900 p-8 rounded-xl border border-slate-700 mb-16 shadow-2xl">
+                <h3 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-2 text-left">Keep in Touch</h3>
+                <div class="flex flex-col gap-4 text-lg text-slate-400 text-left">
+                    <div class="flex items-center"><i class="fa-solid fa-globe w-8 text-blue-400"></i> Official Web Domain: <span class="text-white ml-2">kucc.ku.edu.np</span></div>
+                    <div class="flex items-center"><i class="fa-brands fa-github w-8 text-white"></i> KUCC's repo: <span class="text-white ml-2">github.com/kucc1997</span></div>
+                    <div class="flex items-center"><i class="fa-brands fa-github w-8 text-white"></i> KUOSC's repo: <span class="text-white ml-2">github.com/kuosc2005</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Controls & Progress -->
+    <div id="slide-counter">Slide 1 of 18</div>
+    
+    <div id="controls">
+        <button class="control-btn" id="prevBtn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="control-btn" id="nextBtn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <div id="progress-bar" style="width: 0%;"></div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
+        const slideCounter = document.getElementById('slide-counter');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update Progress Bar & Counter
+            const progress = (currentSlide / (slides.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+            slideCounter.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize progress bar
+        updateSlides();
+    </script>
+</body>
+</html>
+```
